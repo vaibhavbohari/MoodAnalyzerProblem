@@ -6,29 +6,39 @@ using System.Threading.Tasks;
 
 namespace MoodAnalyzerProblem
 {
-    public enum Mood
-    {
-        Happy,
-        sad
-    }
-
     public class MoodAnalyzer
     {
-        public string CheckMood(string msg)
+        public string message;  //instance variable
+        public MoodAnalyzer(string message)
         {
-            //msg : Kunal  is Happy for his new Bike
-            //msg : Kunal  is Sad after getting  fail in exam
-          
-            if (msg.Contains("happy", StringComparison.OrdinalIgnoreCase))
+            this.message = message;
+        }
+
+        //uc-2 handling exceptions
+        public string AnalyzeMood()    //Analyzer method find mood
+        {
+            try
+            {
+                if (message.ToLower().Contains("sad"))
+                {
+                    return "sad";
+                }
+                else
+                {
+                    return "happy";
+                }
+            }
+            catch (NullReferenceException)
             {
                 return "happy";
             }
-            else
-            {
-                return "sad";
-            }
+
         }
     }
-
-
 }
+
+
+
+
+
+   
