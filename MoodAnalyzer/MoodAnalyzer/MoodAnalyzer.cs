@@ -8,37 +8,38 @@ namespace MoodAnalyzerProblem
 {
     public class MoodAnalyzer
     {
-        public string message;  //instance variable
+        public string message; //instance variable
         public MoodAnalyzer(string message)
         {
             this.message = message;
         }
-
         //uc-2 handling exceptions
-        public string AnalyzeMood()    //Analyzer method find mood
+        public string AnalyzeMood()  //Analyzer method find mood
         {
             try
             {
-                if (message.ToLower().Contains("sad"))
+                if (this.message.Equals(string.Empty))
                 {
-                    return "sad";
+                    throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.EMPTY_EXCEPTION, "Message should not be empty");
                 }
-                else
+
+                if (this.message.ToLower().Contains("happy"))
                 {
                     return "happy";
                 }
+                else
+                {
+                    return "sad";
+                }
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException ex)
             {
-                return "happy";
+                return ex.Message;
+                throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.NULL_EXCEPTION, "Mood should not be null");
+
             }
 
         }
     }
+
 }
-
-
-
-
-
-   

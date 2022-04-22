@@ -6,20 +6,46 @@ namespace MoodAnalyzerTestcase
     public class UnitTest1
     {
         [TestMethod]
-        [TestCategory("null case")]
-        public void GivenNullReturnHappyMood()
+       
+        public void GivenNullShouldReturnCustomNullException()
         {
-            ///AAA methodology
-            ///arrange
-            string message = null;
-            string expected = "happy";
-            MoodAnalyzer moodAnalyzer = new MoodAnalyzer(message);
+            //AAA Methology
 
-            //Act
-            string Actual = moodAnalyzer.AnalyzeMood();
-
-            //Assert
-            Assert.AreEqual(expected, Actual);
+            //Arrange
+            string excepted = "Message should not be null";
+            MoodAnalyzer moodAnalyser = new MoodAnalyzer(null);
+            try
+            {
+                //ACT
+                string actual = moodAnalyser.AnalyzeMood();
+            }
+            catch (MoodAnalyzerException ex)
+            {
+                //ASSERT
+                Assert.AreEqual(excepted, ex.Message);
+            }
         }
+
+        [TestMethod]
+        
+        public void GivenEmptyShouldReturnThrowEmptyException()
+        {
+            //AAA Methology
+
+            //Arrange
+            string excepted = "Message should not be empty";
+            MoodAnalyzer moodAnalyser = new MoodAnalyzer(string.Empty);
+            try
+            {
+                //ACT
+                string actual = moodAnalyser.AnalyzeMood();
+            }
+            catch (MoodAnalyzerException  ex)
+            {
+                //ASSERT
+                Assert.AreEqual(excepted, ex.Message);
+            }
+        }
+
     }
 }
